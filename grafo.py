@@ -4,10 +4,14 @@ import pygraphviz as pgv
 import functools 
 from PIL import Image
 
+
 def fuzzy( A , B , t):
+    
     C = A
     for i in range( t ):
+        #Multiplicacion vector de estados y matriz
         C = np.dot(C,B)
+        #Aplicacion de la normalizacion o parametrizacion
         C = np.array([ 1/(1+math.exp(-1*x)) for x in C ])
     return C
 def outDegree(graph):
@@ -68,6 +72,6 @@ print("Centrality Degree", cd)
 print("\n\n Vector de estados",C)
 im = Image.open(file+".png")
 im.show()
-#C2 = np.array( map(lambda x: 1/(1+math.exp(-x)), C)) 
+
 
 
