@@ -1,0 +1,6 @@
+pip install Sphinx
+pip install rinohtype
+pip install numpydoc
+pip install RinohType
+mkdir docs
+cd docs

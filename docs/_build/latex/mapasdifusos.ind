@@ -1,0 +1,11 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter F
+  \item \spxentry{fuzzy()}\spxextra{en el m\IeC {\'o}dulo fuzzyMap}, \hyperpage{1}
+  \item \spxentry{fuzzyMap}\spxextra{m\IeC {\'o}dulo}, \hyperpage{1}
+
+\end{sphinxtheindex}
