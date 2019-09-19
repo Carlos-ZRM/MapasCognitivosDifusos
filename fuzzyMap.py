@@ -150,40 +150,34 @@ def loadGraph(path):
     B = pgv.AGraph(path)
     B.layout(prog = 'circo') # layout with default (neato)
     B.draw(path[:-3]+'png') # draw png
-"""
-if __name__ == "__main__":
 
 
-    label = ["AoF","FP","P","L","EoL"]
-    file = "Fuzzy"
-    C = np.array([1,1,1,1,1])
-    B = np.array([[ 0.0 , 1.0 ,-0.1, 0.8 , 0.0 ],
+label = ["AoF","FP","P","L","EoL"]
+file = "Fuzzy"
+C = np.array([1,1,1,1,1])
+B = np.array([[ 0.0 , 1.0 ,-0.1, 0.8 , 0.0 ],
                 [ 0.0 , 0.0 , 0.0, 1.0 , 0.0 ],
                 [-0.2 ,-1.0 , 0.0,-0.2 , 0.0 ],
                 [ 0.0 , 0.0 , 0.0, 0.0 , 0.0 ],
                 [ 0.2 , 0.5 ,-0.5,-0.2 , 0.0 ]
-                ])
+             ])
 
-    C , soluciones = fuzzy( C ,B , t = 10 )
-    od = outDegree(B)
-    id = inDegree(B)
-    cd = od+id
-    den = density(B)
-    hier = hierarchy(od)
-
-    saveDot(B, label, name = file+".dot")
-    loadGraph(file+".dot")
-    print("\nInput : Mapa Cognitivo Difuso ")
-    print(B)
-    print("Output : Dregrees ")
-
-    print("Out Degree", od)
-    print("In Degree", id)
-    print("Centrality Degree", cd )
-    print("Density ", den )
-    print("Hierarchy ", hier )
-    print("\n\n Vector de estados",C)
-    im = Image.open(file+".png")
-    im.show()
-
-"""
+C , soluciones = fuzzy( C ,B , t = 10 )
+od = outDegree(B)
+id = inDegree(B)
+cd = od+id
+den = density(B)
+ #hier = hierarchy(od)
+saveDot(B, label, name = file+".dot")
+loadGraph(file+".dot")
+print("\nInput : Mapa Cognitivo Difuso ")
+print(B)
+print("Output : Dregrees ")
+print("Out Degree", od)
+print("In Degree", id)
+print("Centrality Degree", cd )
+print("Density ", den )
+print("Hierarchy ", hier )
+print("\n\n Vector de estados",C)
+im = Image.open(file+".png")
+im.show()
