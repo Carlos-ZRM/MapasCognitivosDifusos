@@ -51,7 +51,7 @@ module_level_variable1 : int
 
 
 
-def fuzzy( vector , mapa , t ):
+def fuzzy( vector , mapa , t, function=None ):
     '''
         Funcion que calcula el mapa difuso y retorna el valor  
         de la funcion f en f(t)
@@ -77,7 +77,10 @@ def fuzzy( vector , mapa , t ):
         #Multiplicacion vector de estados y matriz
         vector_aux = np.dot(vector_aux, mapa)
         #Aplicacion de la normalizacion o parametrizacion
-        sigmoide(vector_aux)
+        if function is None :
+            sigmoide(vector_aux)
+        else :
+            vector_aux = function(vector_aux)
         soluciones.append(vector_aux)
     
     return vector_aux, soluciones
@@ -156,18 +159,22 @@ def loadGraph(path):
     B.layout(prog = 'circo') # layout with default (neato)
     B.draw(path[:-3]+'png') # draw png
 
+def makeSquashFunction(lambdaU):
+    vfunc = np.vectorize(lambdaU)
+    return vfunc
 
 label = ["AoF","FP","P","L","EoL"]
 file = "Fuzzy"
 C = np.array([1,1,1,1,1])
 B = np.array([[ 0.0 , 1.0 ,-0.1, 0.8 , 0.0 ],
                 [ 0.0 , 0.0 , 0.0, 1.0 , 0.0 ],
-                [-0.2 ,-1.0 , 0.0,-0.2 , 0.0 ],
+                [-0.2 ,-1.0 , 0.0,-0.2 , 0.0 ], 
                 [ 0.0 , 0.0 , 0.0, 0.0 , 0.0 ],
                 [ 0.2 , 0.5 ,-0.5,-0.2 , 0.0 ]
              ])
-
-C , soluciones = fuzzy( C ,B , t = 10 )
+l = lambda x : 1/(1+math.exp(5*x)) 
+f = makeSquashFunction(  l )
+C , soluciones = fuzzy( C ,B , t = 10 , function= f )
 od = outDegree(B)
 id = inDegree(B)
 cd = od+id
