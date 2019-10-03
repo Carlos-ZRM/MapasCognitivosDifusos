@@ -1,5 +1,6 @@
 import numpy as np 
 import math
+import networkx as nx
 import pygraphviz as pgv
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -78,7 +79,7 @@ def fuzzy( vector , mapa , t ):
         #Aplicacion de la normalizacion o parametrizacion
         sigmoide(vector_aux)
         soluciones.append(vector_aux)
-    saveHistograma(soluciones)
+    
     return vector_aux, soluciones
 
 def sigmoide ( vector ):
@@ -129,24 +130,28 @@ def saveDot(grafo, label, name):
     tf.write("\n}")
     tf.close()
 
-def saveHistograma(vector):
+def saveHistograma(vector, labels):
     vec = np.transpose(vector)
     x = np.size(vec,0)
     y =np.size(vec,1)
     t = range(y) 
      #for i in range(x):
 
+    fig, ax = plt.subplots()
     #print(vec[0],np.size(vec,0) , np.size(vec,1))
-
+    #fig, ax = plt.subplots()
     for i in range( x ):
         #plt.subplot(x, 1, i+1)
-        plt.plot(t, vec[i], '-', lw=1)
+        ax.plot(t, vec[i], '-', lw=.5 , label=labels[i]  )
         plt.grid(True)
         plt.ylim( 0, 1 )
+    plt.legend()
     plt.tight_layout()
     plt.show()
 
+
 def loadGraph(path):
+    #G = nx.Graph(nx.drawing.nx_agraph.read_dot(path))
     B = pgv.AGraph(path)
     B.layout(prog = 'circo') # layout with default (neato)
     B.draw(path[:-3]+'png') # draw png
@@ -167,9 +172,7 @@ od = outDegree(B)
 id = inDegree(B)
 cd = od+id
 den = density(B)
- #hier = hierarchy(od)
-saveDot(B, label, name = file+".dot")
-loadGraph(file+".dot")
+#hier = hierarchy(od)
 print("\nInput : Mapa Cognitivo Difuso ")
 print(B)
 print("Output : Dregrees ")
@@ -177,7 +180,12 @@ print("Out Degree", od)
 print("In Degree", id)
 print("Centrality Degree", cd )
 print("Density ", den )
-print("Hierarchy ", hier )
+#print("Hierarchy ", hier )
 print("\n\n Vector de estados",C)
 im = Image.open(file+".png")
 im.show()
+
+saveDot(B, label, name = file+".dot")
+loadGraph(file+".dot")
+saveHistograma(soluciones, label )
+

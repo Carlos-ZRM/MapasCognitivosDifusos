@@ -1,5 +1,0 @@
-\select@language {spanish}
-\contentsline {chapter}{\numberline {1}Contenidos}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Indices}{3}{chapter.2}
-\contentsline {chapter}{\IeC {\'I}ndice de M\IeC {\'o}dulos Python}{5}{section*.4}
-\contentsline {chapter}{\IeC {\'I}ndice}{7}{section*.5}
