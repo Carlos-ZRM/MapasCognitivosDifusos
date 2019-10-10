@@ -158,7 +158,7 @@ class FuzzyMap:
         B = pgv.AGraph(path)
         B.layout(prog = 'circo') # layout with default (neato)
         B.draw(path[:-3]+'png') # draw png
-
+     
     def makeSquashFunction(self, lambdaU):
         vfunc = np.vectorize(lambdaU)
         return vfunc
@@ -176,8 +176,8 @@ class FuzzyMap:
         else :
             f = self.makeSquashFunction(  l )
                 
-            self.vector_array, soluciones = self.fuzzy( self.vector_array , self.map_array , t , l )
-        
+            self.vector_array, soluciones = self.fuzzy( self.vector_array , self.map_array , t , f)
+            
         
         od = self.outDegree( self.map_array )
         id = self.inDegree(self.map_array )
@@ -193,15 +193,17 @@ class FuzzyMap:
         print("Density ", den )
         #print("Hierarchy ", hier )
         print("\n\n Vector de estados",self.vector_array)
+        
+        self.saveDot(self.map_array , self.label, name = self.proyect +".dot")
+        self.loadGraph(self.proyect+".dot")
+        
         im = Image.open(self.proyect+".png")
         im.show()
-
-        self.saveDot(self.vector_array , self.label, name = self.proyect +".dot")
-        self.loadGraph(self.proyect+".dot")
         self.saveHistograma(soluciones, self.label )
-        
+
+
 label = ["AoF","FP","P","L","EoL"]
-proyect  = "Fuzzy"
+proyect  = "Proyecto1"
 vector_array = np.array([1,1,1,1,1])
 map_array = np.array([[ 0.0 , 1.0 ,-0.1, 0.8 , 0.0 ],
                 [ 0.0 , 0.0 , 0.0, 1.0 , 0.0 ],
