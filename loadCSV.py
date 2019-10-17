@@ -30,17 +30,34 @@ def load_multiple_CSV(path):
     
         if f[-4:] == ".csv" or f[-4:] == ".CSV":
             matrizb = load_one_CSV(f)
-            matriza = addMatriz(matriza,matrizb)
-    print(matriza)
+            addMatriz(matriza,matrizb)
+            
     return matriza
 def addMatriz(matriza, matrizb):
-    for i, j in matrizb.items():
+    for i, elements in matrizb.items():
         i = i.replace(" ","")
         i = i.lower()
         if i in matriza:
-            pass
+            # Si esta en el vector original se recupera
+            va = matriza[i]
+            
+            for j, k  in elements.items():
+                
+                # se recorren los elementos del vector b
+                # se verifica si j el indice esta en el vector a
+                # Si esta se suman 
+                if j in va:
+                    #print(va[j])
+                    x = float(va[j])
+                    y = float(elements[j])
+                    
+                    va[j]= str(x+y)
+                # si no se agrega 
+                else :
+                    va[j]=k
+            
         else :
-            matriza[i]=j
+            matriza[i]=elements
     return matriza
 def adyacence_to_matrx(dict ):
     # dict 
@@ -63,17 +80,17 @@ def adyacence_to_matrx(dict ):
             mat[x][y] = float (k)
 
 
-    return mat 
+    return key_list , mat , vector 
 
 def fuzzy_from_csv( path, opc = 'f' ):
     if opc == 'f':
         adyacence = load_one_CSV(path)
     elif opc == 'd':
         adyacence = load_multiple_CSV(path)
-    #print(adyacence)
     
-    mat = adyacence_to_matrx(adyacence)
-    print(mat)
-    return None
+    key_list , mat , vector = adyacence_to_matrx(adyacence)
+    
+    return key_list , mat , vector
 
 matriz = fuzzy_from_csv(".", 'd' )
+print(matriz)
