@@ -21,6 +21,8 @@ def load_one_CSV(file):
             d.pop('node')
             adyacence[n]= d
     csvfile.close()
+
+    #print("\n**",adyacence,"\n**")
     return adyacence
 
 def load_multiple_CSV(path):
@@ -62,10 +64,11 @@ def addMatriz(matriza, matrizb):
 def adyacence_to_matrx(dict ):
     # dict 
     key_list =list( dict.keys() )
+    #key_list = list(map(lambda x : x.replace(" ",""),key_list))
     vector = []
-    print(key_list)
+    #print(key_list)
     l = len(key_list)
-    mat = np.zeros( (l,l) )
+    mat = np.zeros( (l,l) ,dtype=float)
     for i, elements in dict.items():
         # x --> y mät¨[x][y]
         
@@ -87,10 +90,10 @@ def fuzzy_from_csv( path, opc = 'f' ):
         adyacence = load_one_CSV(path)
     elif opc == 'd':
         adyacence = load_multiple_CSV(path)
-    
+    ##print(adyacence)
     key_list , mat , vector = adyacence_to_matrx(adyacence)
     
-    return key_list , mat , vector
+    return key_list , mat , np.array(vector,dtype=float)
 
-matriz = fuzzy_from_csv(".", 'd' )
-print(matriz)
+#matriz = fuzzy_from_csv(".", 'd' )
+#print(matriz)

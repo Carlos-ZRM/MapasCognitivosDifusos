@@ -1,0 +1,26 @@
+digraph G {
+A0 [label="aof"];
+A1 [label="fp"];
+A2 [label="p"];
+A3 [label="l"];
+A4 [label="eol"];
+A5 [label="mas"];
+
+A0 -> A1 [label="2.0"];
+A0 -> A2 [label="-0.2"];
+A0 -> A3 [label="1.6"];
+A1 -> A3 [label="2.0"];
+A2 -> A0 [label="-0.4"];
+A2 -> A1 [label="-2.0"];
+A2 -> A3 [label="-0.4"];
+A4 -> A0 [label="0.4"];
+A4 -> A1 [label="1.0"];
+A4 -> A2 [label="-1.0"];
+A4 -> A3 [label="-0.4"];
+A5 -> A0 [label="1.0"];
+A5 -> A1 [label="1.0"];
+A5 -> A2 [label="1.0"];
+A5 -> A3 [label="1.0"];
+A5 -> A4 [label="1.0"];
+
+}
